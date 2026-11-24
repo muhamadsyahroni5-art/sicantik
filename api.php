@@ -10,8 +10,8 @@ header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 mysqli_report(MYSQLI_REPORT_OFF);
 
 $dbHost = getenv('SICANTIK_DB_HOST') ?: 'localhost';
-$dbUser = getenv('SICANTIK_DB_USER') ?: 'root';
-$dbPass = getenv('SICANTIK_DB_PASS') !== false ? getenv('SICANTIK_DB_PASS') : '';
+$dbUser = getenv('SICANTIK_DB_USER') ?: 'sicantik_user';
+$dbPass = getenv('SICANTIK_DB_PASS') ?: 'Prakom123*';
 $dbName = getenv('SICANTIK_DB_NAME') ?: 'sicantik_kemenag_lebak';
 $dbPort = (int)(getenv('SICANTIK_DB_PORT') ?: 3306);
 

@@ -5,14 +5,19 @@
  * Otomatis membuat database, tabel, dan data awal jika belum tersedia.
  */
 if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+    $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+        || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
+    ini_set('session.cookie_secure', $isHttps ? '1' : '0');
+    ini_set('session.cookie_httponly', '1');
     session_start();
 }
 
 mysqli_report(MYSQLI_REPORT_OFF);
 
 $dbHost = getenv('SICANTIK_DB_HOST') ?: 'localhost';
-$dbUser = getenv('SICANTIK_DB_USER') ?: 'root';
-$dbPass = getenv('SICANTIK_DB_PASS') !== false ? getenv('SICANTIK_DB_PASS') : '';
+$dbUser = getenv('SICANTIK_DB_USER') ?: 'sicantik_user';
+$dbPass = getenv('SICANTIK_DB_PASS') !== false ? getenv('SICANTIK_DB_PASS') : 'Prakom123*';
 $dbName = getenv('SICANTIK_DB_NAME') ?: 'sicantik_kemenag_lebak';
 $dbPort = (int)(getenv('SICANTIK_DB_PORT') ?: 3306);
 
